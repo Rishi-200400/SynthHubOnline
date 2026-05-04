@@ -1,5 +1,8 @@
 function filterservices() {
-  const input = document.getElementById("serviceSearch").value.toLowerCase();
+  const input = document
+    .getElementById("serviceSearch")
+    .value.toLowerCase()
+    .trim();
 
   const cards = document.querySelectorAll(".service-card");
 
@@ -30,12 +33,8 @@ function openQueryEmail(serviceName, documents) {
   const subject = "service Query - " + serviceName;
 
   const body = `Hello, 
-I would like to raise an application for this service. 
-
-
-Service Name: ${serviceName} 
-Documents Uploading: ${documents.join(", ")} 
- 
+I would like to raise an application for ${serviceName}  
+I'm uploading ${documents.join(", ")}
 
 My Name: 
 My Phone Number: 
@@ -56,13 +55,9 @@ function openQueryWhatsApp(serviceName, documents) {
   const whatsappNumber = "9980445902";
 
   const message = `Hello, 
-I would like to raise an application for this service. 
+I would like to raise an application for ${serviceName}  
+I'm uploading ${documents.join(", ")}
 
-
-Service Name: ${serviceName} 
-Documents Uploading: ${documents.join(", ")} 
-
- 
 My Name: 
 My Phone Number: 
 
@@ -109,7 +104,7 @@ serviceContainer.addEventListener("click", function (event) {
 
   const queryMenu = option.closest(".query-menu");
   const serviceName = queryMenu.dataset.service;
-  const documents = JSON.parse(queryMenu.dataset.documents || "[]");
+  const documents = JSON.parse(queryMenu.dataset.documents || "[]") || [];
   const action = option.dataset.action;
 
   if (action === "whatsapp") {
