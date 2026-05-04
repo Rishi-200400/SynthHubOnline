@@ -8,483 +8,7 @@
 
     <title>Virtual Application Desk</title>
 
-    <style>
-      * {
-        margin: 0;
-
-        padding: 0;
-
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Segoe UI", Arial, sans-serif;
-
-        background: #f7f3ee;
-
-        color: #2f241f;
-
-        line-height: 1.6;
-      }
-
-      header {
-        background: #fffaf5;
-
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      }
-
-      .banner {
-        position: relative;
-
-        width: 100%;
-
-        height: auto;
-
-        overflow: cover;
-      }
-
-      .banner img {
-        width: 100%;
-
-        height: 100%;
-
-        object-fit: cover;
-
-        display: block;
-      }
-
-      .banner-text {
-        position: absolute;
-
-        top: 50%;
-
-        left: 50%;
-
-        transform: translate(-50%, -50%);
-
-        background: rgba(47, 36, 31, 0.65);
-
-        color: #fff;
-
-        padding: 24px 32px;
-
-        border-radius: 12px;
-
-        text-align: center;
-
-        width: 80%;
-
-        max-width: 700px;
-      }
-
-      .banner-text h1 {
-        font-size: 40px;
-
-        margin-bottom: 10px;
-      }
-
-      .banner-text p {
-        font-size: 18px;
-
-        color: #f3e9dd;
-      }
-
-      .search-section {
-        width: 90%;
-
-        max-width: 1200px;
-
-        margin: 35px auto 10px;
-
-        text-align: center;
-      }
-
-      .search-box {
-        width: 100%;
-
-        max-width: 500px;
-
-        padding: 14px 18px;
-
-        font-size: 16px;
-
-        border: 1px solid #d7c4b2;
-
-        border-radius: 999px;
-
-        outline: none;
-
-        background: #fff;
-
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      }
-
-      .search-box:focus {
-        border-color: #9c5c38;
-
-        box-shadow: 0 0 0 4px rgba(156, 92, 56, 0.12);
-      }
-
-      .services-heading {
-        width: 90%;
-
-        max-width: 1200px;
-
-        margin: 20px auto 10px;
-
-        text-align: center;
-
-        font-size: 30px;
-
-        color: #5a3726;
-
-        font-weight: 700;
-      }
-
-      .services {
-        width: 90%;
-
-        max-width: 1200px;
-
-        margin: 30px auto 60px;
-
-        display: grid;
-
-        grid-template-columns: repeat(3, 1fr);
-
-        gap: 28px;
-      }
-
-      details.service-card {
-        background: #fff;
-
-        border-radius: 16px;
-
-        overflow: visible;
-
-        z-index: 1;
-
-        box-shadow: 0 6px 18px rgba(72, 48, 34, 0.08);
-
-        border: 1px solid #eadccf;
-
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-
-      details.service-card:hover {
-        transform: translateY(-6px);
-
-        z-index: 20;
-
-        box-shadow: 0 10px 22px rgba(72, 48, 34, 0.14);
-      }
-
-      summary.card-summary {
-        list-style: none;
-
-        cursor: pointer;
-
-        outline: none;
-
-        position: relative;
-      }
-
-      summary.card-summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .service-image {
-        width: 100%;
-
-        height: 220px;
-
-        object-fit: cover;
-
-        display: block;
-
-        background: #f3e7dc;
-      }
-
-      .service-code {
-        position: absolute;
-
-        top: 10px;
-
-        right: 10px;
-
-        z-index: 2;
-
-        padding: 5px 10px;
-
-        font-size: 12px;
-
-        font-weight: 600;
-
-        letter-spacing: 0.4px;
-
-        color: #fffaf5;
-
-        background: rgba(139, 79, 47, 0.82);
-
-        border: 1px solid rgba(255, 240, 225, 0.22);
-
-        border-radius: 999px;
-
-        line-height: 1;
-
-        pointer-events: none;
-
-        box-shadow: 0 2px 8px rgba(47, 36, 31, 0.12);
-      }
-
-      .service-title {
-        padding: 18px;
-
-        text-align: center;
-
-        font-size: 22px;
-
-        font-weight: 700;
-
-        color: #7a4224;
-
-        background: #fff;
-
-        border-top: 1px solid #f0e5dc;
-      }
-
-      .documents {
-        padding: 18px 22px 24px;
-
-        background: #fffaf6;
-
-        border-top: 1px solid #eee1d5;
-      }
-
-      .documents h3 {
-        margin-bottom: 12px;
-
-        color: #4a2e21;
-
-        font-size: 18px;
-      }
-
-      .documents ul {
-        padding-left: 20px;
-
-        margin-bottom: 18px;
-      }
-
-      .documents li {
-        margin-bottom: 8px;
-
-        font-size: 15px;
-
-        color: #4d4038;
-      }
-
-      .query-menu {
-        position: relative;
-
-        display: inline-block;
-
-        width: 100%;
-
-        max-width: 240px;
-
-        z-index: 30;
-      }
-
-      .query-toggle {
-        list-style: none;
-
-        display: inline-block;
-
-        width: 100%;
-
-        padding: 12px 18px;
-
-        background: #8b4f2f;
-
-        color: #fff;
-
-        border-radius: 999px;
-
-        font-size: 15px;
-
-        font-weight: 600;
-
-        cursor: pointer;
-
-        user-select: none;
-
-        text-align: center;
-
-        transition:
-          background 0.3s ease,
-          transform 0.2s ease;
-      }
-
-      .query-toggle:hover {
-        background: #6f3d22;
-
-        transform: translateY(-2px);
-      }
-
-      .query-toggle::-webkit-details-marker {
-        display: none;
-      }
-
-      .query-menu[open] .query-toggle {
-        background: #6f3d22;
-      }
-
-      .query-options {
-        position: absolute;
-
-        top: calc(100% + 10px);
-
-        left: 0;
-
-        width: 100%;
-
-        background: #fffaf6;
-
-        border: 1px solid #eadccf;
-
-        border-radius: 14px;
-
-        box-shadow: 0 8px 20px rgba(72, 48, 34, 0.12);
-
-        padding: 10px;
-
-        z-index: 50;
-      }
-
-      .query-option {
-        display: block;
-
-        width: 100%;
-
-        padding: 10px 12px;
-
-        border-radius: 10px;
-
-        color: #5a3726;
-
-        text-decoration: none;
-
-        font-size: 14px;
-
-        font-weight: 600;
-
-        margin-bottom: 6px;
-
-        background: #fff;
-
-        border: 1px solid #f0e5dc;
-
-        text-align: center;
-      }
-
-      .query-option:last-child {
-        margin-bottom: 0;
-      }
-
-      .query-option:hover {
-        background: #f7ede4;
-      }
-
-      .no-results {
-        display: none;
-
-        width: 90%;
-
-        max-width: 1200px;
-
-        margin: 10px auto 40px;
-
-        text-align: center;
-
-        color: #7a5b49;
-
-        font-size: 18px;
-      }
-
-      footer {
-        background: #2f241f;
-
-        color: #fff;
-
-        text-align: center;
-
-        padding: 40px 20px;
-      }
-
-      footer h2 {
-        font-size: 28px;
-
-        margin-bottom: 16px;
-      }
-
-      footer p {
-        margin: 8px 0;
-
-        font-size: 16px;
-
-        color: #f1dfd0;
-      }
-
-      footer a {
-        color: #ffcc9a;
-
-        text-decoration: none;
-      }
-
-      footer a:hover {
-        text-decoration: underline;
-      }
-
-      @media (max-width: 992px) {
-        .services {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .banner-text h1 {
-          font-size: 30px;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .services {
-          grid-template-columns: 1fr;
-        }
-
-        .banner {
-          height: auto;
-        }
-
-        .banner-text {
-          width: 88%;
-
-          padding: 16px;
-        }
-
-        .banner-text h1 {
-          font-size: 24px;
-        }
-
-        .banner-text p {
-          font-size: 14px;
-        }
-
-        .services-heading {
-          font-size: 24px;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
 
   <body>
@@ -500,7 +24,6 @@
         id="serviceSearch"
         class="search-box"
         placeholder="Search service by name..."
-        onkeyup="filterservices()"
       />
     </section>
 
@@ -510,11 +33,7 @@
 
     <main>
       <section class="services" id="serviceContainer">
-        <details
-          class="service-card"
-          name="services"
-          data-name=" Aadhaar Service"
-        >
+        <details class="service-card" data-name=" Aadhaar Service">
           <summary class="card-summary">
             <span class="service-code"> ₹100-150</span>
 
@@ -545,31 +64,19 @@
               <li>Current address proof</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Aadhaar"
+              data-documents='["Adhaar Card", "Address Proof"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'Aadhaar', [
-                      'Adhaar Card',
-                      'Address Proof',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'Aadhaar', [
-                      'Adhaar Card',
-                      'Address Proof',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -577,7 +84,7 @@
           </div>
         </details>
 
-        <details class="service-card" name="services" data-name="Pan card">
+        <details class="service-card" data-name="Pan card">
           <summary class="card-summary">
             <span class="service-code"> ₹150</span>
 
@@ -599,21 +106,19 @@
               <li>Additional Document if required</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Pan card"
+              data-documents='["Pan Card"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="openQueryWhatsApp(event, 'Pan card', ['Pan Card'])"
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="openQueryEmail(event, 'Pan card', ['Pan Card'])"
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -621,7 +126,7 @@
           </div>
         </details>
 
-        <details class="service-card" name="services" data-name="Passport">
+        <details class="service-card" data-name="Passport">
           <summary class="card-summary">
             <span class="service-code"> ₹2000</span>
 
@@ -645,31 +150,19 @@
               <li>Additional Document if required</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Passport"
+              data-documents='["Aadhaar card", "SSLC Marks Sheet"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'Passport', [
-                      'Aadhaar card',
-                      'SSLC Marks Sheet',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'Passport', [
-                      'Aadhaar card',
-                      'SSLC Marks Sheet',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -677,7 +170,7 @@
           </div>
         </details>
 
-        <details class="service-card" name="services" data-name="Voter id">
+        <details class="service-card" data-name="Voter id">
           <summary class="card-summary">
             <span class="service-code"> ₹200</span>
 
@@ -699,21 +192,19 @@
               <li>Additional Document if required</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Voter id"
+              data-documents='["Voter Id"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="openQueryWhatsApp(event, 'Voter id', ['Voter Id'])"
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="openQueryEmail(event, 'Voter id', ['Voter Id'])"
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -721,11 +212,7 @@
           </div>
         </details>
 
-        <details
-          class="service-card"
-          name="services"
-          data-name="Ayushman health card"
-        >
+        <details class="service-card" data-name="Ayushman health card">
           <summary class="card-summary">
             <span class="service-code"> ₹150</span>
 
@@ -747,31 +234,19 @@
               <li>Passport size photo</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Ayushman health card"
+              data-documents='["Aadhaar card", "Passport size photo"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'Ayushman health card', [
-                      'Aadhaar card',
-                      'Passport size photo',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'Ayushman health card', [
-                      'Aadhaar card',
-                      'Passport size photo',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -779,11 +254,7 @@
           </div>
         </details>
 
-        <details
-          class="service-card"
-          name="services"
-          data-name="Police verification"
-        >
+        <details class="service-card" data-name="Police verification">
           <summary class="card-summary">
             <span class="service-code"> ₹700</span>
 
@@ -812,33 +283,19 @@
               <li>Address Proof</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Police verification"
+              data-documents='["Passport size photo", "Aadhaar card", "Address Proof"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'Police verification', [
-                      'Passport size photo',
-                      'Aadhaar card',
-                      'Address Proof',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'Police verification', [
-                      'Passport size photo',
-                      'Aadhaar card',
-                      'Address Proof',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -846,11 +303,7 @@
           </div>
         </details>
 
-        <details
-          class="service-card"
-          name="services"
-          data-name="Property tax payment"
-        >
+        <details class="service-card" data-name="Property tax payment">
           <summary class="card-summary">
             <span class="service-code"> Tax + ₹150</span>
 
@@ -870,29 +323,19 @@
               <li>Previous Tax piad receipt</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Property tax payment"
+              data-documents='["Tax piad receipt"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'Property tax payment', [
-                      'Tax piad receipt',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'Property tax payment', [
-                      'Tax piad receipt',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -900,7 +343,7 @@
           </div>
         </details>
 
-        <details class="service-card" name="services" data-name="EC/ CC">
+        <details class="service-card" data-name="EC/ CC">
           <summary class="card-summary">
             <span class="service-code">₹800</span>
 
@@ -920,23 +363,19 @@
               <li>Registered Deed</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="EC/ CC"
+              data-documents='["Registered Deed"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'EC/ CC', ['Registered Deed'])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="openQueryEmail(event, 'EC/ CC', ['Registered Deed'])"
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -944,7 +383,7 @@
           </div>
         </details>
 
-        <details class="service-card" name="services" data-name="BDA khata">
+        <details class="service-card" data-name="BDA khata">
           <summary class="card-summary">
             <span class="service-code">₹550</span>
 
@@ -992,39 +431,19 @@
 
             <li>Latest EC</li>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="BDA khata"
+              data-documents='["Latest Tax receipt", "Registered Deed", "Aadhaar Card", "Passport size photo", "Khata certificate, Possesion Certificate", "EC"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'BDA khata', [
-                      'Latest Tax receipt',
-                      'Registered Deed',
-                      'Aadhaar Card',
-                      'Passport size photo',
-                      'Khata certificate, Possesion Certificate',
-                      'EC',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'BDA khata', [
-                      'Latest Tax receipt',
-                      'Registered Deed',
-                      'Aadhaar Card',
-                      'Passport size photo',
-                      'Khata certificate, Possesion Certificate',
-                      'EC',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -1032,11 +451,7 @@
           </div>
         </details>
 
-        <details
-          class="service-card"
-          name="services"
-          data-name="Revenue E-swathu"
-        >
+        <details class="service-card" data-name="Revenue E-swathu">
           <summary class="card-summary">
             <span class="service-code">₹2060</span>
 
@@ -1066,39 +481,19 @@
               <li>Ec (within 15 Days)</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Revenue E-swathu"
+              data-documents='["Tax receipt", "Deed", "Aadhaar Card", "GPS Property photo", "Bescom bill", "Ec"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'Revenue E-swathu', [
-                      'Tax receipt',
-                      'Deed',
-                      'Aadhaar Card',
-                      'GPS Property photo',
-                      'Bescom bill',
-                      'Ec',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'Revenue E-swathu', [
-                      'Tax receipt',
-                      'Deed',
-                      'Aadhaar Card',
-                      'GPS Property photo',
-                      'Bescom bill',
-                      'Ec',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -1106,7 +501,7 @@
           </div>
         </details>
 
-        <details class="service-card" name="services" data-name="BBMP E-khata">
+        <details class="service-card" data-name="BBMP E-khata">
           <summary class="card-summary">
             <span class="service-code">₹350</span>
 
@@ -1152,37 +547,19 @@
               <li>Ec</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="BBMP E-khata"
+              data-documents='["Tax receipt", "Deed", "Aadhaar Card", "GPS Property photo", "Bescom bill"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'BBMP E-khata', [
-                      'Tax receipt',
-                      'Deed',
-                      'Aadhaar Card',
-                      'GPS Property photo',
-                      'Bescom bill',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'BBMP E-khata', [
-                      'Tax receipt',
-                      'Deed',
-                      'Aadhaar Card',
-                      'GPS Property photo',
-                      'Bescom bill',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -1190,11 +567,7 @@
           </div>
         </details>
 
-        <details
-          class="service-card"
-          name="services"
-          data-name="Seva sindhu services"
-        >
+        <details class="service-card" data-name="Seva sindhu services">
           <summary class="card-summary">
             <span class="service-code">₹350</span>
 
@@ -1226,29 +599,19 @@
               <li>Request Letter</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="Seva sindhu services"
+              data-documents='["Aadhaar card"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'Seva sindhu services', [
-                      'Aadhaar card',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'Seva sindhu services', [
-                      'Aadhaar card',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -1256,11 +619,7 @@
           </div>
         </details>
 
-        <details
-          class="service-card"
-          name="services"
-          data-name="BBMP B to A khata"
-        >
+        <details class="service-card" data-name="BBMP B to A khata">
           <summary class="card-summary">
             <span class="service-code">₹1200</span>
 
@@ -1288,37 +647,19 @@
               <li>Single Plot Plan</li>
             </ul>
 
-            <details class="query-menu">
+            <details
+              class="query-menu"
+              data-service="BBMP B to A khata"
+              data-documents='["E Khata", "Aadhaar card", "DC Conversation order", "Building Sketch", "Single Plot Plan"]'
+            >
               <summary class="query-toggle">Send Documents</summary>
 
               <div class="query-options">
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryWhatsApp(event, 'BBMP B to A khata', [
-                      'E Khata',
-                      'Aadhaar card',
-                      'DC Conversation order',
-                      'Building Sketch',
-                      'Single Plot Plan',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="whatsapp"
                   >Send via WhatsApp</a
                 >
 
-                <a
-                  href="#"
-                  class="query-option"
-                  onclick="
-                    openQueryEmail(event, 'BBMP B to A khata', [
-                      'E Khata',
-                      'Aadhaar card',
-                      'DC Conversation order',
-                      'Building Sketch',
-                      'Single Plot Plan',
-                    ])
-                  "
+                <a href="#" class="query-option" data-action="email"
                   >Send via Email</a
                 >
               </div>
@@ -1328,30 +669,22 @@
       </section>
     </main>
 
-    <footer style="padding: 10px 0">
-      <h1 style="text-align: center">Contact Us <br /></h1>
+    <footer class="site-footer">
+      <h1 class="footer-title">Contact Us <br /></h1>
 
-      <div
-        class="footer-content"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px 120px;
-        "
-      >
+      <div class="footer-content">
         <div class="footer-left">
           <img src="./images/SH Logo.png" alt="Business Logo" width="250" />
         </div>
 
-        <div class="footer-right" style="text-align: right">
-          <h3 style="margin: 15px 0">
+        <div class="footer-right">
+          <h3>
             Email:
             <a href="mailto:synthhubonline@gmail.com"
               >synthhubonline@gmail.com
             </a>
           </h3>
-          <h3 style="margin: 15px 0">
+          <h3>
             Phone:
             <a
               href="https://wa.me/9980445902"
@@ -1360,122 +693,11 @@
               >+91 99804 45902</a
             >
           </h3>
-          <h3 style="margin: 15px 0">Address: Bangalore, Karnataka, India</h3>
+          <h3>Address: Bangalore, Karnataka, India</h3>
         </div>
       </div>
     </footer>
 
-    <script>
-      function filterservices() {
-        const input = document
-          .getElementById("serviceSearch")
-          .value.toLowerCase();
-
-        const cards = document.querySelectorAll(".service-card");
-
-        const noResults = document.getElementById("noResults");
-
-        let visibleCount = 0;
-
-        cards.forEach((card) => {
-          const serviceName = card.getAttribute("data-name").toLowerCase();
-
-          if (serviceName.includes(input)) {
-            card.style.display = "";
-
-            visibleCount++;
-          } else {
-            card.style.display = "none";
-
-            card.removeAttribute("open");
-          }
-        });
-
-        noResults.style.display = visibleCount === 0 ? "block" : "none";
-      }
-
-      function openQueryEmail(event, serviceName, documents) {
-        event.preventDefault();
-
-        const businessEmail = "synthhubonline@gmail.com";
-
-        const subject = "service Query - " + serviceName;
-
-        const body = `Hello, 
-I would like to raise an application for this service. 
-
-
-Service Name: ${serviceName} 
-Documents Uploading: ${documents.join(", ")} 
- 
-
-My Name: 
-My Phone Number: 
-
- 
-
-Thank you.`;
-
-        window.location.href =
-          "mailto:" +
-          businessEmail +
-          "?subject=" +
-          encodeURIComponent(subject) +
-          "&body=" +
-          encodeURIComponent(body);
-      }
-
-      function openQueryWhatsApp(event, serviceName, documents) {
-        event.preventDefault();
-
-        const whatsappNumber = "9980445902";
-
-        const message = `Hello, 
-I would like to raise an application for this service. 
-
-
-Service Name: ${serviceName} 
-Documents Uploading: ${documents.join(", ")} 
-
- 
-My Name: 
-My Phone Number: 
-
- 
-
-Thank you.`;
-
-        window.open(
-          "https://wa.me/" +
-            whatsappNumber +
-            "?text=" +
-            encodeURIComponent(message),
-
-          "_blank",
-        );
-      }
-
-      const queryMenus = document.querySelectorAll(".query-menu");
-
-      queryMenus.forEach((menu) => {
-        menu.addEventListener("toggle", function () {
-          if (this.open) {
-            queryMenus.forEach((otherMenu) => {
-              if (otherMenu !== this) {
-                otherMenu.removeAttribute("open");
-              }
-            });
-          }
-        });
-      });
-
-      document.addEventListener("click", function (event) {
-        queryMenus.forEach((menu) => {
-          if (!menu.contains(event.target)) {
-            menu.removeAttribute("open");
-          }
-        });
-      });
-    </script>
+    <script src="./script.js"></script>
   </body>
 </html>
