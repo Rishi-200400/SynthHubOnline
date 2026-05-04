@@ -29,7 +29,7 @@ header {
 
   height: auto;
 
-  overflow: cover;
+  overflow: hidden; /* was: overflow: cover; (invalid) */
 }
 
 .banner img {
@@ -40,42 +40,6 @@ header {
   object-fit: cover;
 
   display: block;
-}
-
-.banner-text {
-  position: absolute;
-
-  top: 50%;
-
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  background: rgba(47, 36, 31, 0.65);
-
-  color: #fff;
-
-  padding: 24px 32px;
-
-  border-radius: 12px;
-
-  text-align: center;
-
-  width: 80%;
-
-  max-width: 700px;
-}
-
-.banner-text h1 {
-  font-size: 40px;
-
-  margin-bottom: 10px;
-}
-
-.banner-text p {
-  font-size: 18px;
-
-  color: #f3e9dd;
 }
 
 .search-section {
