@@ -29,7 +29,7 @@ header {
 
   height: auto;
 
-  overflow: hidden; /* was: overflow: cover; (invalid) */
+  overflow: hidden;
 }
 
 .banner img {
